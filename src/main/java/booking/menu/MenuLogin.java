@@ -8,7 +8,8 @@ public class MenuLogin {
 
     /**
      * TODO (Anggota A): tampilkan layar login (lihat Layar 1 sampai 3 di mockup).
-     * Langkah: minta NIM/email dan password -> UserRepository.cariByIdentitas() ->
+     * Langkah: minta "Username / NIM" (mahasiswa pakai NIM, admin pakai username
+     * seperti admin1) dan password -> UserRepository.cariByIdentitas() ->
      * user.login(password). Jika benar: Mahasiswa buka MenuMahasiswa, Admin buka MenuAdmin.
      * Jika salah: tampilkan pesan error dan minta ulang.
      */

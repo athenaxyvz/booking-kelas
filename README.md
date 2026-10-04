@@ -26,7 +26,7 @@ Akun contoh dari `seed.sql`:
 
 | Peran | Login | Password |
 |-------|-------|----------|
-| Admin | `admin@kampus.ac.id` | `admin123` |
+| Admin | `admin1` atau `admin2` (username) | `admin123` |
 | Mahasiswa | `25210001` (NIM) | `password123` |
 
 ## 3. Struktur proyek dan pemilik file
@@ -93,8 +93,9 @@ Sebelum iterasi 1 selesai, Anggota B dan C boleh memakai data sementara di memor
 
 ## 7. Catatan keputusan
 
-- **Login:** memakai NIM (mahasiswa) atau email (siapa pun). Mockup menulis "Username / NIM", jadi samakan
-  tulisan di layar atau ubah rancangannya bersama.
+- **Login:** mahasiswa memakai **NIM**, admin memakai **username** (`admin1`, `admin2`). Kolom `nim` hanya diisi
+  untuk mahasiswa dan kolom `username` hanya untuk admin. Layar login menulis "Username / NIM". Email tetap
+  disimpan sebagai data kontak dan tidak dipakai untuk login.
 - **Password** disimpan apa adanya agar sederhana untuk tugas. Kalau ada waktu, ubah menjadi hash.
 - **Status ruang** (`AKTIF` atau `PERAWATAN`) adalah kondisi umum ruang dan berbeda dari ketersediaan pada jam tertentu.
 - **Aturan bentrok:** hanya pengajuan `DISETUJUI` yang memblokir jadwal ruang.
