@@ -7,8 +7,8 @@ package booking.model;
 public class Admin extends User {
     private String username;   // dipakai admin untuk login, misalnya admin1
 
-    public Admin(String idUser, String nama, String email, String password, String username) {
-        super(idUser, nama, email, password);
+    public Admin(String idUser, String nama, String password, String username) {
+        super(idUser, nama, password);
         this.username = username;
     }
 

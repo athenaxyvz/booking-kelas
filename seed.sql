@@ -8,13 +8,13 @@
 
 USE booking_kelas;
 
-INSERT INTO `user` (id_user, nama, email, password, role, nim, username) VALUES
-('U001', 'Admin',          'admin1@kampus.ac.id', 'admin123',    'ADMIN',     NULL,       'admin1'),
-('U002', 'Andi Pratama',   'andi@kampus.ac.id',   'password123', 'MAHASISWA', '25210001', NULL),
-('U003', 'Siti Aisyah',    'siti@kampus.ac.id',   'password123', 'MAHASISWA', '25210002', NULL),
-('U004', 'Budi Santoso',   'budi@kampus.ac.id',   'password123', 'MAHASISWA', '25210003', NULL),
-('U005', 'Rina Wulandari', 'rina@kampus.ac.id',   'password123', 'MAHASISWA', '25210004', NULL),
-('U006', 'Admin 2',        'admin2@kampus.ac.id', 'admin123',    'ADMIN',     NULL,       'admin2');
+INSERT INTO `user` (id_user, nama, password, role, nim, username) VALUES
+('U001', 'Admin',          'admin123',    'ADMIN',     NULL,       'admin1'),
+('U002', 'Andi Pratama',   'password123', 'MAHASISWA', '25210001', NULL),
+('U003', 'Siti Aisyah',    'password123', 'MAHASISWA', '25210002', NULL),
+('U004', 'Budi Santoso',   'password123', 'MAHASISWA', '25210003', NULL),
+('U005', 'Rina Wulandari', 'password123', 'MAHASISWA', '25210004', NULL),
+('U006', 'Admin 2',        'admin123',    'ADMIN',     NULL,       'admin2');
 
 INSERT INTO ruang (id_ruang, kode_ruang, nama_ruang, kapasitas, lokasi, keterangan, status) VALUES
 ('R001', 'A101', 'Lab Komputer',  30, 'Gedung B', 'Lab 1',    'AKTIF'),

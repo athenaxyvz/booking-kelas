@@ -10,19 +10,16 @@ package booking.model;
 public class User {
     private String idUser;
     private String nama;
-    private String email;
     private String password;
 
-    public User(String idUser, String nama, String email, String password) {
+    public User(String idUser, String nama, String password) {
         this.idUser = idUser;
         this.nama = nama;
-        this.email = email;
         this.password = password;
     }
 
     public String getIdUser() { return idUser; }
     public String getNama() { return nama; }
-    public String getEmail() { return email; }
 
     /** CONTOH SUDAH JADI: true jika password yang diketik sama dengan password user ini. */
     public boolean login(String passwordInput) {
