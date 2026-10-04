@@ -10,17 +10,19 @@ DROP DATABASE IF EXISTS booking_kelas;
 CREATE DATABASE booking_kelas CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE booking_kelas;
 
--- Pengguna (mahasiswa dan admin). Kolom nim hanya diisi untuk mahasiswa.
+-- Pengguna (mahasiswa dan admin).
+-- Login: mahasiswa memakai NIM, admin memakai username (admin1, admin2).
+-- Kolom nim hanya diisi untuk mahasiswa, kolom username hanya untuk admin.
 CREATE TABLE `user` (
   id_user  VARCHAR(10)  NOT NULL,
   nama     VARCHAR(100) NOT NULL,
-  email    VARCHAR(100) NOT NULL,
   password VARCHAR(100) NOT NULL,
   role     ENUM('MAHASISWA', 'ADMIN') NOT NULL,
   nim      VARCHAR(20)  NULL,
+  username VARCHAR(30)  NULL,
   PRIMARY KEY (id_user),
-  UNIQUE KEY uk_user_email (email),
-  UNIQUE KEY uk_user_nim (nim)
+  UNIQUE KEY uk_user_nim (nim),
+  UNIQUE KEY uk_user_username (username)
 ) ENGINE = InnoDB;
 
 -- Ruang yang bisa dipinjam.

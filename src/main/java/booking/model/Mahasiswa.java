@@ -11,8 +11,8 @@ import java.util.List;
 public class Mahasiswa extends User {
     private String nim;
 
-    public Mahasiswa(String idUser, String nama, String email, String password, String nim) {
-        super(idUser, nama, email, password);
+    public Mahasiswa(String idUser, String nama, String password, String nim) {
+        super(idUser, nama, password);
         this.nim = nim;
     }
 

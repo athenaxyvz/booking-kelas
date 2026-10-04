@@ -5,10 +5,14 @@ package booking.model;
  * Pemilik: Anggota A (kelas)  |  verifikasiPengajuan() dikerjakan Anggota C, kelolaRuang() Anggota A
  */
 public class Admin extends User {
+    private String username;   // dipakai admin untuk login, misalnya admin1
 
-    public Admin(String idUser, String nama, String email, String password) {
-        super(idUser, nama, email, password);
+    public Admin(String idUser, String nama, String password, String username) {
+        super(idUser, nama, password);
+        this.username = username;
     }
+
+    public String getUsername() { return username; }
 
     /**
      * TODO (Anggota C): menyetujui atau menolak satu pengajuan.
