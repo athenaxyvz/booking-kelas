@@ -24,11 +24,11 @@ public class Admin extends User {
     }
 
     /**
-     * TODO (Anggota A): pintu masuk untuk tambah, edit, dan hapus ruang.
-     * Petunjuk: boleh dibiarkan kosong dan semua alurnya ditulis di KelolaRuangMenu
-     * + RuangRepository, selama alasan desainnya bisa kalian jelaskan ke dosen.
+     * Pintu masuk untuk tambah, edit, dan hapus ruang (UC-09).
+     * Seluruh alur layar dan isiannya ada di KelolaRuangMenu, sedangkan akses datanya
+     * ada di RuangRepository. Method ini hanya membukanya sebagai tugas Admin.
      */
     public void kelolaRuang() {
-        throw new UnsupportedOperationException("TODO (Anggota A): kelolaRuang()");
+        new booking.menu.KelolaRuangMenu().tampilkan();
     }
 }
