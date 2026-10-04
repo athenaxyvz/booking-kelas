@@ -1,19 +1,80 @@
+
 package booking.menu;
+
+import booking.model.Admin;
+import booking.model.Mahasiswa;
+import booking.model.User;
+import booking.repository.UserRepository;
+import booking.util.Input;
 
 /**
  * Layar login (UC-01).
  * Pemilik: Anggota A
+ *
+ * Alur: minta "Username / NIM" dan password -> UserRepository.cariByIdentitas()
+ * -> user.login(password). Mahasiswa masuk MenuMahasiswa, Admin masuk MenuAdmin.
+ * Setelah logout, program kembali ke layar login lagi.
  */
 public class MenuLogin {
 
-    /**
-     * TODO (Anggota A): tampilkan layar login (lihat Layar 1 sampai 3 di mockup).
-     * Langkah: minta "Username / NIM" (mahasiswa pakai NIM, admin pakai username
-     * seperti admin1) dan password -> UserRepository.cariByIdentitas() ->
-     * user.login(password). Jika benar: Mahasiswa buka MenuMahasiswa, Admin buka MenuAdmin.
-     * Jika salah: tampilkan pesan error dan minta ulang.
-     */
+    private final UserRepository userRepository = new UserRepository();
+
     public void tampilkan() {
-        System.out.println("> [TODO Anggota A] Layar login belum dikerjakan.");
+        boolean jalan = true;
+        while (jalan) {
+            System.out.println();
+            System.out.println("=== LOGIN ===");
+            System.out.println("Silakan login untuk melanjutkan.");
+            System.out.println("(Ketik 0 pada Username / NIM untuk menutup program)");
+
+            User user = mintaLogin();
+            if (user == null) {
+                System.out.println("> Program ditutup. Sampai jumpa!");
+                jalan = false;
+            } else if (user instanceof Admin admin) {
+                System.out.println("> Login berhasil. Selamat datang, " + admin.getNama() + "!");
+                System.out.println("> Masuk sebagai: Admin");
+                new MenuAdmin().tampilkan(admin);
+            } else if (user instanceof Mahasiswa mahasiswa) {
+                System.out.println("> Login berhasil. Selamat datang, " + mahasiswa.getNama() + "!");
+                System.out.println("> Masuk sebagai: Mahasiswa");
+                new MenuMahasiswa().tampilkan(mahasiswa);
+            }
+        }
+    }
+
+    /**
+     * Mengulang pertanyaan login sampai berhasil.
+     * Mengembalikan null jika pengguna mengetik 0 (ingin menutup program).
+     */
+    private User mintaLogin() {
+        while (true) {
+            String identitas = Input.teks("Username / NIM : ");
+            if (identitas.equals("0")) {
+                return null;
+            }
+            if (identitas.isEmpty()) {
+                System.out.println("> Username / NIM tidak boleh kosong.");
+                continue;
+            }
+
+            String password = Input.teks("Password : ");
+            System.out.println("> Memverifikasi data...");
+
+            User user;
+            try {
+                user = userRepository.cariByIdentitas(identitas);
+            } catch (RuntimeException e) {
+                System.out.println("> Terjadi masalah pada database: " + e.getMessage());
+                System.out.println("> Silakan coba lagi.");
+                continue;
+            }
+
+            if (user != null && user.login(password)) {
+                return user;
+            }
+            System.out.println("> Login gagal. Username/NIM atau password salah.");
+            System.out.println("> Silakan coba lagi.");
+        }
     }
 }

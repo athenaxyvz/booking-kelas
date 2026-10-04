@@ -1,21 +1,43 @@
 package booking.menu;
 
 import booking.model.Admin;
+import booking.util.Input;
 
 /**
- * Menu utama admin (Layar 11 di mockup).
+ * Menu utama admin (Layar 12 di mockup).
  * Pemilik: Anggota A
+ *
+ * Polanya sama dengan MenuMahasiswa:
+ * loop -> cetak pilihan -> baca angka -> switch -> panggil layar yang sesuai.
  */
 public class MenuAdmin {
 
-    /**
-     * TODO (Anggota A): tulis menu admin dengan pola yang sama seperti MenuMahasiswa.
-     * 1. Lihat dashboard admin   -> new DashboardAdminMenu().tampilkan(admin)  (Anggota C)
-     * 2. Verifikasi pengajuan    -> new VerifikasiMenu().tampilkan(admin)      (Anggota C)
-     * 3. Kelola data ruang       -> new KelolaRuangMenu().tampilkan()          (Anggota A)
-     * 0. Logout (dengan konfirmasi Y/N)
-     */
     public void tampilkan(Admin admin) {
-        System.out.println("> [TODO Anggota A] Menu admin belum dikerjakan.");
+        boolean jalan = true;
+        while (jalan) {
+            System.out.println();
+            System.out.println("=== MENU ADMIN ===");
+            System.out.println("Halo, " + admin.getNama());
+            System.out.println();
+            System.out.println("1. Lihat dashboard admin");
+            System.out.println("2. Verifikasi pengajuan");
+            System.out.println("3. Kelola data ruang");
+            System.out.println("0. Logout");
+            System.out.println();
+
+            int pilihan = Input.angka("Pilih menu : ");
+            switch (pilihan) {
+                case 1 -> new DashboardAdminMenu().tampilkan(admin);   // Anggota C
+                case 2 -> new VerifikasiMenu().tampilkan(admin);       // Anggota C
+                case 3 -> new KelolaRuangMenu().tampilkan();           // Anggota A
+                case 0 -> {
+                    if (Input.konfirmasi("Anda yakin ingin keluar?")) {
+                        admin.logout();
+                        jalan = false;
+                    }
+                }
+                default -> System.out.println("> Pilihan tidak valid.");
+            }
+        }
     }
 }
