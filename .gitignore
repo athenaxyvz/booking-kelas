@@ -1,0 +1,12 @@
+# Build
+target/
+out/
+*.class
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Rahasia (jangan di-push!)
+config.properties
