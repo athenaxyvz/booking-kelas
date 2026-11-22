@@ -2,6 +2,7 @@ package booking.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import booking.repository.PeminjamanRepository;
 
 /**
  * Ruang yang bisa dipinjam.
@@ -54,6 +55,8 @@ public class Ruang {
      * Petunjuk: gunakan PeminjamanRepository.adaBentrok(...).
      */
     public boolean cekKetersediaan(LocalDate tanggal, LocalTime jamMulai, LocalTime jamSelesai) {
-        throw new UnsupportedOperationException("TODO (Anggota B): cekKetersediaan()");
-    }
+        if (!AKTIF.equals(status)) {
+            return false;
+        }
+        return !new PeminjamanRepository().adaBentrok(idRuang, tanggal, jamMulai, jamSelesai);    }
 }
