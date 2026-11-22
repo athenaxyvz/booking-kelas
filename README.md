@@ -1,101 +1,200 @@
 # Sistem Booking Kelas (Peminjaman Ruang)
 
-Tugas Pemrograman Berorientasi Objek. Aplikasi terminal (CLI) berbasis Java dengan database MySQL,
-dirancang mengikuti fase Unified Process (use case, class diagram, sequence diagram).
+## Deskripsi Proyek
 
-Repositori ini berisi **kerangka proyek**: struktur kelas sudah sesuai class diagram, sedangkan
-logika program ditulis oleh kelompok. Cari tanda `TODO (Anggota X)` untuk melihat bagian yang harus dikerjakan.
+Sistem Booking Kelas merupakan aplikasi berbasis terminal (*Command-Line Interface/CLI*) yang dikembangkan untuk memenuhi proyek mata kuliah Pemrograman Berorientasi Objek (PBO). Aplikasi ini membantu mahasiswa mengajukan peminjaman ruang kelas dan membantu admin mengelola data ruang serta memverifikasi pengajuan.
 
-## 1. Yang perlu dipasang
+Aplikasi dikembangkan menggunakan Java 17 dan MySQL 8. Koneksi antara aplikasi dan database menggunakan JDBC (MySQL Connector/J). Antarmuka aplikasi dijalankan melalui terminal, bukan melalui browser.
 
-- JDK 17 atau lebih baru
-- MySQL 8 (boleh lewat XAMPP) dan MySQL Workbench atau phpMyAdmin
-- IntelliJ IDEA (Community) atau VS Code dengan Extension Pack for Java
-- Git, atau GitHub Desktop
+## Fitur Utama
 
-## 2. Cara menjalankan
+### Mahasiswa
+- Login menggunakan NIM dan password.
+- Melihat dashboard mahasiswa.
+- Melihat daftar ruang dan informasi status ruang.
+- Mengajukan peminjaman ruang berdasarkan tanggal dan waktu.
+- Melihat status pengajuan peminjaman.
+- Logout dari aplikasi.
 
-1. Clone repositori ini, lalu buka foldernya sebagai **proyek Maven** (IDE akan mengunduh driver MySQL otomatis).
-2. Di MySQL, jalankan `schema.sql`, lalu `seed.sql`.
-3. Salin `config.example.properties` menjadi `config.properties`, lalu isi password MySQL kamu.
-   File `config.properties` tidak ikut di-push (sudah ada di `.gitignore`).
-4. Jalankan kelas `booking.Main`. Kalau muncul "Koneksi database berhasil", setup kamu sudah benar.
-   (Alternatif lewat terminal: `mvn compile exec:java`.)
+### Admin
+- Login menggunakan username dan password.
+- Melihat dashboard admin.
+- Melihat dan memverifikasi pengajuan peminjaman.
+- Menyetujui atau menolak pengajuan.
+- Mengelola data ruang, termasuk menambah, mengubah, dan menghapus ruang.
 
-Akun contoh dari `seed.sql`:
+### Aturan Sistem
+- Ruang dengan status `PERAWATAN` tidak dapat dipilih.
+- Jadwal yang bertabrakan dengan peminjaman berstatus `DISETUJUI` tidak tersedia untuk pengajuan baru.
+- Pengajuan baru memiliki status awal `MENUNGGU`.
+- Jam selesai harus lebih besar daripada jam mulai.
+- Ruang yang masih memiliki data pengajuan tidak dapat dihapus karena keterkaitan data pada database.
+
+## Teknologi yang Digunakan
+
+| Teknologi | Keterangan |
+|---|---|
+| Java 17 | Bahasa pemrograman utama |
+| MySQL 8 | Sistem manajemen basis data |
+| JDBC | Koneksi aplikasi Java ke database |
+| MySQL Connector/J 8.3.0 | Driver JDBC |
+| Apache Maven | Manajemen dependensi dan proses build |
+| Git dan GitHub | Version control dan kolaborasi |
+| Visual Studio Code / IntelliJ IDEA | Lingkungan pengembangan |
+| Terminal / CLI | Antarmuka aplikasi |
+
+## Persyaratan Sistem
+
+Sebelum menjalankan aplikasi, siapkan:
+1. JDK 17 atau versi lebih baru.
+2. MySQL Server 8 yang sudah aktif.
+3. MySQL Workbench atau klien MySQL lain untuk menjalankan file SQL.
+4. Apache Maven jika aplikasi dijalankan melalui perintah Maven.
+5. Visual Studio Code dengan Extension Pack for Java atau IntelliJ IDEA (opsional).
+
+**Catatan:** MySQL Server adalah layanan database yang harus berjalan. MySQL Workbench hanya merupakan aplikasi klien untuk mengelola database.
+
+## Instalasi dan Konfigurasi
+
+### 1. Clone repository
+
+```bash
+git clone https://github.com/athenaxyvz/booking-kelas.git
+cd booking-kelas
+```
+
+### 2. Buat database dan isi data awal
+
+Pastikan MySQL Server sudah berjalan. Buka MySQL Workbench atau klien MySQL lain, lalu jalankan file berikut secara berurutan:
+
+1. `schema.sql`
+2. `seed.sql`
+
+`schema.sql` membuat database `booking_kelas` dan tabel yang diperlukan. **Perhatian:** perintah pada file ini menghapus database `booking_kelas` yang sudah ada sebelum membuatnya kembali. Cadangkan data penting terlebih dahulu jika database tersebut sudah berisi data yang ingin dipertahankan.
+
+`seed.sql` memasukkan data awal untuk pengujian dan demonstrasi.
+
+### 3. Konfigurasi koneksi database
+
+Salin `config.example.properties` menjadi `config.properties`.
+
+Pada Windows PowerShell:
+
+```powershell
+Copy-Item config.example.properties config.properties
+```
+
+Buka `config.properties`, kemudian sesuaikan URL, username, dan password MySQL lokal:
+
+```properties
+db.url=jdbc:mysql://localhost:3306/booking_kelas?useSSL=false&allowPublicKeyRetrieval=true
+db.user=root
+db.password=ISI_PASSWORD_MYSQL_KAMU
+```
+
+Ganti nilai `db.user` dan `db.password` sesuai konfigurasi MySQL pada komputer masing-masing.
+
+**Jangan mengunggah `config.properties` yang berisi kredensial pribadi ke GitHub.** File tersebut harus tetap diabaikan oleh Git melalui `.gitignore`. Repository menyediakan `config.example.properties` sebagai contoh konfigurasi.
+
+### 4. Jalankan aplikasi
+
+Dari direktori utama proyek, jalankan:
+
+```bash
+mvn clean compile
+mvn exec:java
+```
+
+Atau gunakan:
+
+```bash
+mvn compile exec:java
+```
+
+Alternatifnya, buka proyek melalui Visual Studio Code atau IntelliJ IDEA, tunggu dependensi Maven dimuat, lalu jalankan kelas utama `booking.Main`.
+
+Pastikan MySQL Server aktif dan konfigurasi koneksi sudah benar sebelum menjalankan aplikasi.
+
+## Akun Uji Coba
+
+Akun berikut tersedia pada data awal `seed.sql`.
 
 | Peran | Login | Password |
-|-------|-------|----------|
-| Admin | `admin1` atau `admin2` (username) | `admin123` |
-| Mahasiswa | `25210001` (NIM) | `password123` |
+|---|---|---|
+| Admin | `admin1` | `admin123` |
+| Admin | `admin2` | `admin123` |
+| Mahasiswa | `25210001` | `password123` |
+| Mahasiswa | `25210002` | `password123` |
+| Mahasiswa | `25210003` | `password123` |
+| Mahasiswa | `25210004` | `password123` |
 
-## 3. Struktur proyek dan pemilik file
+Mahasiswa login menggunakan NIM, sedangkan admin login menggunakan username. Akun tersebut merupakan akun contoh untuk pengujian lokal proyek, bukan kredensial untuk sistem produksi.
 
-```
+## Struktur Direktori
+
+```text
 booking-kelas/
-|-- schema.sql, seed.sql              Anggota A
-|-- config.example.properties
-|-- docs/SKENARIO_TEST.md             Anggota C
-`-- src/main/java/booking/
-    |-- Main.java                     Anggota A
-    |-- database/Koneksi.java         Anggota A   (sudah jadi)
-    |-- util/Input.java                           (sudah jadi, dipakai bersama)
-    |-- model/
-    |   |-- User, Mahasiswa, Admin, Ruang         Anggota A
-    |   `-- Peminjaman                            Anggota B
-    |-- repository/
-    |   |-- UserRepository, RuangRepository       Anggota A
-    |   `-- PeminjamanRepository                  Anggota B dan C (lihat tanda di dalam file)
-    `-- menu/
-        |-- MenuLogin, MenuMahasiswa, MenuAdmin   Anggota A
-        |-- DaftarRuangMenu, KelolaRuangMenu      Anggota A
-        |-- DashboardMahasiswaMenu                Anggota B
-        |-- AjukanPeminjamanMenu                  Anggota B
-        |-- StatusPengajuanMenu                   Anggota B
-        `-- DashboardAdminMenu, VerifikasiMenu    Anggota C
+├── docs/
+│   └── SKENARIO_TEST.md
+├── src/
+│   └── main/
+│       └── java/
+│           └── booking/
+│               ├── database/
+│               │   └── Koneksi.java
+│               ├── menu/
+│               │   ├── AjukanPeminjamanMenu.java
+│               │   ├── DaftarRuangMenu.java
+│               │   ├── DashboardAdminMenu.java
+│               │   ├── DashboardMahasiswaMenu.java
+│               │   ├── KelolaRuangMenu.java
+│               │   ├── MenuAdmin.java
+│               │   ├── MenuLogin.java
+│               │   ├── MenuMahasiswa.java
+│               │   ├── StatusPengajuanMenu.java
+│               │   └── VerifikasiMenu.java
+│               ├── model/
+│               │   ├── Admin.java
+│               │   ├── Mahasiswa.java
+│               │   ├── Peminjaman.java
+│               │   ├── Ruang.java
+│               │   └── User.java
+│               ├── repository/
+│               │   ├── PeminjamanRepository.java
+│               │   ├── RuangRepository.java
+│               │   └── UserRepository.java
+│               ├── util/
+│               │   └── Input.java
+│               └── Main.java
+├── config.example.properties
+├── pom.xml
+├── schema.sql
+├── seed.sql
+└── README.md
 ```
 
-Aturan utama: **satu file dikerjakan satu orang**. Kalau perlu mengubah file milik orang lain, minta pemiliknya
-atau ubah lewat Pull Request yang ditinjau pemiliknya.
+## Pengujian
 
-## 4. Bagian yang sudah jadi (untuk dipelajari)
+Dokumen skenario pengujian tersedia pada `docs/SKENARIO_TEST.md`. Pengujian mencakup proses login, daftar dan pengelolaan ruang, pengajuan peminjaman, pemeriksaan ketersediaan ruang, verifikasi admin, dan ringkasan data.
 
-| File | Isi contoh |
-|------|-----------|
-| `database/Koneksi.java` | Koneksi JDBC ke MySQL |
-| `util/Input.java` | Membaca angka, tanggal, jam, dan konfirmasi Y/N |
-| `model/User.java` | `login()` dan `logout()` serta enkapsulasi |
-| `model/Peminjaman.java` | `ubahStatus()` dengan validasi (objek menjaga statusnya sendiri) |
-| `repository/RuangRepository.java` | `semua()`: pola lengkap query JDBC |
-| `menu/MenuMahasiswa.java` | Pola menu terminal (loop, switch, memanggil layar lain) |
+Hasil pengujian akhir dicatat berdasarkan pelaksanaan aplikasi yang sebenarnya.
 
-## 5. Alur kerja Git
+## Demo Aplikasi
 
-```
-git pull                                  # ambil kode terbaru dulu
-git checkout -b fitur/nama-fitur          # satu cabang per fitur
-   ... menulis kode ...
-git add .
-git commit -m "Pesan singkat tentang perubahan"
-git push -u origin fitur/nama-fitur
-```
+Aplikasi ini menggunakan antarmuka terminal (CLI). Sesuai arahan dosen untuk proyek berbasis terminal, demonstrasi aplikasi disediakan dalam bentuk video.
 
-Lalu buka GitHub, buat Pull Request, minta satu teman meninjau, dan klik Merge.
-Biasakan `git pull` sebelum mulai bekerja dan push dalam potongan kecil (minimal sekali sehari).
+**Tautan video demonstrasi:** [Tambahkan tautan video demonstrasi kelompok di sini]
 
-## 6. Urutan pengerjaan (iterasi)
+Tidak ada tautan live website karena aplikasi ini bukan aplikasi web yang di-hosting.
 
-1. **Iterasi 1 (Anggota A):** login, daftar ruang, kelola data ruang, dan pastikan database berjalan di semua laptop.
-2. **Iterasi 2 (Anggota B):** ajukan peminjaman, cek ketersediaan, dan status pengajuan.
-3. **Iterasi 3 (Anggota C):** verifikasi pengajuan, dashboard admin, dan pengujian (`docs/SKENARIO_TEST.md`).
+## Repository
 
-Sebelum iterasi 1 selesai, Anggota B dan C boleh memakai data sementara di memori, lalu beralih ke database.
+https://github.com/athenaxyvz/booking-kelas
 
-## 7. Catatan keputusan
+## Tim Pengembang
 
-- **Login:** mahasiswa memakai **NIM**, admin memakai **username** (`admin1`, `admin2`). Kolom `nim` hanya diisi
-  untuk mahasiswa dan kolom `username` hanya untuk admin. Layar login menulis "Username / NIM". Email tidak dipakai
-  di sistem ini.
-- **Password** disimpan apa adanya agar sederhana untuk tugas. Kalau ada waktu, ubah menjadi hash.
-- **Status ruang** (`AKTIF` atau `PERAWATAN`) adalah kondisi umum ruang dan berbeda dari ketersediaan pada jam tertentu.
-- **Aturan bentrok:** hanya pengajuan `DISETUJUI` yang memblokir jadwal ruang.
+Proyek ini dikerjakan secara berkelompok untuk mata kuliah Pemrograman Berorientasi Objek, Program Studi Teknik Informatika, Fakultas Teknik, Universitas Negeri Manado.
+
+---
+
+Pastikan MySQL Server aktif, database telah disiapkan menggunakan `schema.sql` dan `seed.sql`, serta `config.properties` telah disesuaikan sebelum menjalankan aplikasi.
