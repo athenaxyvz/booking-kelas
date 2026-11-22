@@ -60,18 +60,53 @@ public class PeminjamanRepository {
 
     /** TODO (Anggota B): membuat id berikutnya, misalnya P006 (lihat id terbesar di tabel). */
     public String idBerikutnya() {
-        throw new UnsupportedOperationException("TODO (Anggota B): idBerikutnya()");
+String sql = "SELECT MAX(id_peminjaman) FROM peminjaman";
+        try (PreparedStatement ps = Koneksi.getKoneksi().prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next() && rs.getString(1) != null) {
+                int angka = Integer.parseInt(rs.getString(1).substring(1));
+                return String.format("P%03d", angka + 1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Gagal membuat ID: " + e.getMessage(), e);
+        }
+        return "P001";
     }
 
     /** TODO (Anggota B): menyimpan pengajuan baru (status MENUNGGU, id_admin kosong). */
     public void simpan(Peminjaman peminjaman) {
-        throw new UnsupportedOperationException("TODO (Anggota B): simpan()");
-    }
+String sql = "INSERT INTO peminjaman (id_peminjaman, id_mahasiswa, id_ruang, id_admin, "
+                + "tanggal, jam_mulai, jam_selesai, keperluan, status) "
+                + "VALUES (?, ?, ?, NULL, ?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = Koneksi.getKoneksi().prepareStatement(sql)) {
+            ps.setString(1, peminjaman.getIdPeminjaman());
+            ps.setString(2, peminjaman.getMahasiswa().getIdUser());
+            ps.setString(3, peminjaman.getRuang().getIdRuang());
+            ps.setDate(4, java.sql.Date.valueOf(peminjaman.getTanggal()));
+            ps.setTime(5, java.sql.Time.valueOf(peminjaman.getJamMulai()));
+            ps.setTime(6, java.sql.Time.valueOf(peminjaman.getJamSelesai()));
+            ps.setString(7, peminjaman.getKeperluan());
+            ps.setString(8, Peminjaman.MENUNGGU);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Gagal menyimpan pengajuan: " + e.getMessage(), e);
+        }    }
 
     /** TODO (Anggota B): semua pengajuan milik satu mahasiswa (untuk menu status pengajuan). */
     public List<Peminjaman> cariByMahasiswa(String idMahasiswa) {
-        throw new UnsupportedOperationException("TODO (Anggota B): cariByMahasiswa()");
-    }
+        List<Peminjaman> hasil = new java.util.ArrayList<>();
+        String sql = SELECT_PEMINJAMAN + "WHERE p.id_mahasiswa = ? ORDER BY p.tanggal, p.jam_mulai";
+        try (PreparedStatement ps = Koneksi.getKoneksi().prepareStatement(sql)) {
+            ps.setString(1, idMahasiswa);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    hasil.add(petakan(rs));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Gagal mengambil pengajuan: " + e.getMessage(), e);
+        }
+        return hasil;    }
 
     /**
      * TODO (Anggota B): true jika sudah ada pengajuan DISETUJUI yang jadwalnya bertumpuk.
@@ -82,13 +117,45 @@ public class PeminjamanRepository {
      *     AND jam_mulai < ? AND jam_selesai > ?
      */
     public boolean adaBentrok(String idRuang, LocalDate tanggal, LocalTime jamMulai, LocalTime jamSelesai) {
-        throw new UnsupportedOperationException("TODO (Anggota B): adaBentrok()");
+   String sql = "SELECT COUNT(*) FROM peminjaman "
+                + "WHERE id_ruang = ? AND tanggal = ? AND status = 'DISETUJUI' "
+                + "AND jam_mulai < ? AND jam_selesai > ?";
+        try (PreparedStatement ps = Koneksi.getKoneksi().prepareStatement(sql)) {
+            ps.setString(1, idRuang);
+            ps.setDate(2, java.sql.Date.valueOf(tanggal));
+            ps.setTime(3, java.sql.Time.valueOf(jamSelesai));
+            ps.setTime(4, java.sql.Time.valueOf(jamMulai));
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Gagal mengecek bentrok: " + e.getMessage(), e);
+        }
+        return false;
     }
 
     /** TODO (Anggota B): jumlah pengajuan milik satu mahasiswa; status null berarti semua status. */
     public int hitungByMahasiswa(String idMahasiswa, String status) {
-        throw new UnsupportedOperationException("TODO (Anggota B): hitungByMahasiswa()");
-    }
+        String sql = "SELECT COUNT(*) FROM peminjaman WHERE id_mahasiswa = ?";
+        if (status != null) {
+            sql += " AND status = ?";
+        }
+        try (PreparedStatement ps = Koneksi.getKoneksi().prepareStatement(sql)) {
+            ps.setString(1, idMahasiswa);
+            if (status != null) {
+                ps.setString(2, status);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Gagal menghitung pengajuan: " + e.getMessage(), e);
+        }
+        return 0;    }
 
     // ---------------------------- Bagian Anggota C ----------------------------
 

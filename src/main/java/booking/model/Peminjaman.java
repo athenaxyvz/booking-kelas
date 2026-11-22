@@ -2,6 +2,7 @@ package booking.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import booking.repository.PeminjamanRepository;
 
 /**
  * Objek pusat: menghubungkan Mahasiswa, Ruang, dan Admin.
@@ -58,8 +59,7 @@ public class Peminjaman {
      * Petunjuk: PeminjamanRepository.simpan(this). Pastikan status awalnya MENUNGGU.
      */
     public void buatPengajuan() {
-        throw new UnsupportedOperationException("TODO (Anggota B): buatPengajuan()");
-    }
+new PeminjamanRepository().simpan(this);    }
 
     /**
      * CONTOH SUDAH JADI: objek menjaga statusnya sendiri (encapsulation).
