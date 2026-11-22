@@ -10,3 +10,15 @@ out/
 
 # Rahasia (jangan di-push!)
 config.properties
+
+# Visual Studio
+.vs/
+
+# VS Code
+.vscode/
+
+# Build files
+target/
+
+# Configuration rahasia
+config.properties
