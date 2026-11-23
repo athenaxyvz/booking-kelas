@@ -8,10 +8,7 @@ import booking.util.Input;
 
 import java.util.List;
 
-/**
- * Verifikasi pengajuan (UC-08).
- * Pemilik: Anggota C
- */
+
 public class VerifikasiMenu {
 
     private final PeminjamanRepository repository =

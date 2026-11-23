@@ -7,13 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-/**
- * Menyediakan satu koneksi ke database MySQL.
- * Pemilik: Anggota A  |  STATUS: SUDAH JADI (boleh dipelajari, tidak perlu diubah)
- *
- * Cara pakai di kelas lain:
- *     Connection c = Koneksi.getKoneksi();
- */
+
 public class Koneksi {
     private static Connection koneksi;
 

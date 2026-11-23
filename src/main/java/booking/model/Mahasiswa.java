@@ -5,10 +5,7 @@ import java.time.LocalTime;
 import java.util.List;
 import booking.repository.PeminjamanRepository;
 
-/**
- * Mahasiswa mewarisi User.
- * Pemilik: Anggota A (kelas)  |  method di bawah dikerjakan Anggota B
- */
+
 public class Mahasiswa extends User {
     private String nim;
 
@@ -19,10 +16,7 @@ public class Mahasiswa extends User {
 
     public String getNim() { return nim; }
 
-    /**
-     * TODO (Anggota B): membuat pengajuan peminjaman atas nama mahasiswa ini.
-     * Petunjuk: buat objek Peminjaman, lalu panggil buatPengajuan() (lihat sequence diagram).
-     */
+   
     public Peminjaman ajukanPeminjaman(Ruang ruang, LocalDate tanggal, LocalTime jamMulai,
                                  LocalTime jamSelesai, String keperluan) {
         PeminjamanRepository repo = new PeminjamanRepository();
@@ -31,10 +25,7 @@ public class Mahasiswa extends User {
         pengajuan.buatPengajuan();
         return pengajuan;    }
 
-    /**
-     * TODO (Anggota B): mengambil semua pengajuan milik mahasiswa ini.
-     * Petunjuk: gunakan PeminjamanRepository.cariByMahasiswa(...).
-     */
+    
     public List<Peminjaman> lihatStatusPeminjaman() {
         return new PeminjamanRepository().cariByMahasiswa(getIdUser());    }
 }

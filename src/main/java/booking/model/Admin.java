@@ -3,10 +3,7 @@ package booking.model;
 
 import booking.repository.PeminjamanRepository;
 
-/**
- * Admin mewarisi User.
- * Pemilik: Anggota A (kelas) | verifikasiPengajuan() dikerjakan Anggota C
- */
+
 public class Admin extends User {
 
     private String username;
@@ -20,9 +17,7 @@ public class Admin extends User {
         return username;
     }
 
-    /**
-     * Menyetujui atau menolak satu pengajuan peminjaman.
-     */
+    
     public void verifikasiPengajuan(Peminjaman pengajuan, boolean disetujui) {
 
         if (pengajuan == null) {
@@ -33,10 +28,10 @@ public class Admin extends User {
                 ? Peminjaman.DISETUJUI
                 : Peminjaman.DITOLAK;
 
-        // Mengubah status pengajuan pada objek
+        
         pengajuan.ubahStatus(statusBaru, this);
 
-        // Menyimpan perubahan status ke database
+        
         PeminjamanRepository repository = new PeminjamanRepository();
 
         repository.perbaruiStatus(
@@ -49,9 +44,7 @@ public class Admin extends User {
                 + (disetujui ? "disetujui." : "ditolak."));
     }
 
-    /**
-     * Membuka menu pengelolaan ruang.
-     */
+    
     public void kelolaRuang() {
         new booking.menu.KelolaRuangMenu().tampilkan();
     }

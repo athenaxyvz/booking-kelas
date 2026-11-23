@@ -11,10 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Dashboard mahasiswa (UC-03).
- * Pemilik: Anggota B
- */
+
 public class DashboardMahasiswaMenu {
 
     private static final DateTimeFormatter TGL = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -22,7 +19,7 @@ public class DashboardMahasiswaMenu {
     private static final String[] HARI =
             {"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"};
 
-    /** Ringkasan, jadwal ruang, dan daftar pengajuan mahasiswa (layar 6). */
+    
     public void tampilkan(Mahasiswa mahasiswa) {
         PeminjamanRepository repo = new PeminjamanRepository();
         String idMhs = mahasiswa.getIdUser();

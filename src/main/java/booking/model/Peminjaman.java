@@ -4,10 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import booking.repository.PeminjamanRepository;
 
-/**
- * Objek pusat: menghubungkan Mahasiswa, Ruang, dan Admin.
- * Pemilik: Anggota B (kelas)  |  ubahStatus() adalah contoh yang sudah jadi (dipakai Anggota C)
- */
+
 public class Peminjaman {
     public static final String MENUNGGU = "MENUNGGU";
     public static final String DISETUJUI = "DISETUJUI";
@@ -16,20 +13,20 @@ public class Peminjaman {
     private String idPeminjaman;
     private Mahasiswa mahasiswa;
     private Ruang ruang;
-    private Admin admin;               // kosong (null) sampai diverifikasi
+    private Admin admin;               
     private LocalDate tanggal;
     private LocalTime jamMulai;
     private LocalTime jamSelesai;
     private String keperluan;
     private String status;
 
-    /** Untuk pengajuan baru: status otomatis MENUNGGU. */
+   
     public Peminjaman(String idPeminjaman, Mahasiswa mahasiswa, Ruang ruang, LocalDate tanggal,
                       LocalTime jamMulai, LocalTime jamSelesai, String keperluan) {
         this(idPeminjaman, mahasiswa, ruang, null, tanggal, jamMulai, jamSelesai, keperluan, MENUNGGU);
     }
 
-    /** Untuk data yang dibaca dari database (sudah punya status dan mungkin admin). */
+    
     public Peminjaman(String idPeminjaman, Mahasiswa mahasiswa, Ruang ruang, Admin admin,
                       LocalDate tanggal, LocalTime jamMulai, LocalTime jamSelesai,
                       String keperluan, String status) {
@@ -54,17 +51,11 @@ public class Peminjaman {
     public String getKeperluan() { return keperluan; }
     public String getStatus() { return status; }
 
-    /**
-     * TODO (Anggota B): menyimpan pengajuan baru ke database.
-     * Petunjuk: PeminjamanRepository.simpan(this). Pastikan status awalnya MENUNGGU.
-     */
+    
     public void buatPengajuan() {
 new PeminjamanRepository().simpan(this);    }
 
-    /**
-     * CONTOH SUDAH JADI: objek menjaga statusnya sendiri (encapsulation).
-     * Hanya pengajuan berstatus MENUNGGU yang boleh diubah menjadi DISETUJUI atau DITOLAK.
-     */
+    
     public void ubahStatus(String statusBaru, Admin admin) {
         if (!MENUNGGU.equals(status)) {
             throw new IllegalStateException("Pengajuan " + idPeminjaman + " sudah diproses.");

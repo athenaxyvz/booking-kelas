@@ -1,10 +1,4 @@
--- =====================================================================
--- schema.sql : struktur database Sistem Booking Kelas (MySQL 8)
--- Pemilik : Anggota A
--- Cara pakai: jalankan file ini LEBIH DULU, lalu jalankan seed.sql.
--- PERHATIAN : file ini menghapus database lama (booking_kelas) lalu membuat ulang.
--- Kalau struktur tabel berubah, ubah file ini lewat Pull Request dan kabari grup.
--- =====================================================================
+
 
 DROP DATABASE IF EXISTS booking_kelas;
 CREATE DATABASE booking_kelas CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

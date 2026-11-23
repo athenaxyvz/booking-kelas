@@ -10,16 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * Akses tabel `user`.
- * Pemilik: Anggota A
- */
+
 public class UserRepository {
 
-    /**
-     * Cari user berdasarkan NIM (mahasiswa) atau username (admin).
-     * Mengembalikan objek Mahasiswa atau Admin sesuai kolom role, atau null jika tidak ada.
-     */
+   
     public User cariByIdentitas(String nimAtauUsername) {
         String sql = "SELECT * FROM `user` WHERE nim = ? OR username = ?";
         try {
@@ -39,7 +33,7 @@ public class UserRepository {
         return null;
     }
 
-    /** Mengubah satu baris tabel `user` menjadi objek Mahasiswa atau Admin. */
+    
     private User petakan(ResultSet rs) throws SQLException {
         String id = rs.getString("id_user");
         String nama = rs.getString("nama");

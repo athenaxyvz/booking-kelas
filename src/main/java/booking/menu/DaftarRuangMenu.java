@@ -6,10 +6,7 @@ import booking.util.Input;
 
 import java.util.List;
 
-/**
- * Daftar ruang (UC-05, Layar 8 di mockup).
- * Pemilik: Anggota A
- */
+
 public class DaftarRuangMenu {
 
     private static final String GARIS =
@@ -46,7 +43,7 @@ public class DaftarRuangMenu {
         Input.teks("Tekan Enter untuk kembali ke menu...");
     }
 
-    /** Mengubah nilai database (AKTIF / PERAWATAN) menjadi tulisan untuk layar. */
+    
     private String labelStatus(String status) {
         return Ruang.PERAWATAN.equals(status) ? "Dalam Perawatan" : "Aktif";
     }

@@ -7,16 +7,13 @@ import booking.util.Input;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-/**
- * Status pengajuan (UC-04).
- * Pemilik: Anggota B
- */
+
 public class StatusPengajuanMenu {
 
     private static final DateTimeFormatter TGL = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static final DateTimeFormatter JAM = DateTimeFormatter.ofPattern("HH:mm");
 
-    /** Menampilkan tabel pengajuan milik mahasiswa yang sedang login (layar 7). */
+   
     public void tampilkan(Mahasiswa mahasiswa) {
         List<Peminjaman> daftar = mahasiswa.lihatStatusPeminjaman();
 
@@ -59,7 +56,7 @@ public class StatusPengajuanMenu {
         return sb.toString();
     }
 
-    /** MENUNGGU -> Menunggu */
+    
     private static String rapikan(String status) {
         return status.charAt(0) + status.substring(1).toLowerCase();
     }

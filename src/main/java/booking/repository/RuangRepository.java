@@ -10,15 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Akses tabel ruang.
- * Pemilik: Anggota A
- *
- * semua() adalah CONTOH SUDAH JADI untuk pola JDBC. Method lain dikerjakan dengan pola yang sama.
- */
+
 public class RuangRepository {
 
-    /** CONTOH SUDAH JADI: mengambil semua ruang, diurutkan menurut kode. */
+    
     public List<Ruang> semua() {
         List<Ruang> daftar = new ArrayList<>();
         String sql = "SELECT * FROM ruang ORDER BY kode_ruang";
@@ -33,7 +28,7 @@ public class RuangRepository {
         return daftar;
     }
 
-    /** Mengubah satu baris hasil query menjadi objek Ruang. */
+  
     private Ruang petakan(ResultSet rs) throws SQLException {
         return new Ruang(
                 rs.getString("id_ruang"),
@@ -45,7 +40,7 @@ public class RuangRepository {
                 rs.getString("keterangan"));
     }
 
-    /** Ruang yang statusnya AKTIF saja (dipakai Anggota B untuk cek ketersediaan). */
+   
     public List<Ruang> semuaAktif() {
         List<Ruang> daftar = new ArrayList<>();
         String sql = "SELECT * FROM ruang WHERE status = 'AKTIF' ORDER BY kode_ruang";
@@ -60,7 +55,7 @@ public class RuangRepository {
         return daftar;
     }
 
-    /** Cari satu ruang berdasarkan kode (misalnya A101), atau null jika tidak ada. */
+   
     public Ruang cariByKode(String kode) {
         String sql = "SELECT * FROM ruang WHERE kode_ruang = ?";
         try (PreparedStatement ps = Koneksi.getKoneksi().prepareStatement(sql)) {
@@ -76,7 +71,7 @@ public class RuangRepository {
         return null;
     }
 
-    /** Jumlah semua ruang (untuk dashboard). */
+  
     public int hitung() {
         String sql = "SELECT COUNT(*) FROM ruang";
         try (PreparedStatement ps = Koneksi.getKoneksi().prepareStatement(sql);
@@ -88,11 +83,7 @@ public class RuangRepository {
         }
     }
 
-    /**
-     * Menambah ruang baru. Id ruang dibuat otomatis (misalnya R006), jadi id pada objek
-     * yang dikirim diabaikan.
-     * Melempar IllegalArgumentException jika kode ruang sudah dipakai (kolom kode_ruang unik).
-     */
+   
     public void tambah(Ruang ruang) {
         if (cariByKode(ruang.getKodeRuang()) != null) {
             throw new IllegalArgumentException(
@@ -114,11 +105,7 @@ public class RuangRepository {
         }
     }
 
-    /**
-     * Memperbarui data ruang (nama, kapasitas, lokasi, keterangan, status).
-     * Ruang dicari lewat id_ruang, jadi objeknya sebaiknya berasal dari cariByKode().
-     * Kode ruang tidak ikut diubah.
-     */
+  
     public void ubah(Ruang ruang) {
         String sql = "UPDATE ruang SET nama_ruang = ?, kapasitas = ?, lokasi = ?, "
                 + "keterangan = ?, status = ? WHERE id_ruang = ?";
@@ -138,11 +125,7 @@ public class RuangRepository {
         }
     }
 
-    /**
-     * Menghapus ruang berdasarkan kode.
-     * Melempar IllegalArgumentException jika kode tidak ada, dan IllegalStateException
-     * jika ruang masih punya pengajuan (ditolak database lewat foreign key).
-     */
+ 
     public void hapus(String kode) {
         String sql = "DELETE FROM ruang WHERE kode_ruang = ?";
         try (PreparedStatement ps = Koneksi.getKoneksi().prepareStatement(sql)) {
@@ -154,7 +137,7 @@ public class RuangRepository {
             throw new IllegalStateException("Ruang " + kode
                     + " tidak bisa dihapus karena masih punya pengajuan peminjaman.");
         } catch (SQLException e) {
-            if (e.getErrorCode() == 1451) {   // kode error MySQL untuk foreign key
+            if (e.getErrorCode() == 1451) {   
                 throw new IllegalStateException("Ruang " + kode
                         + " tidak bisa dihapus karena masih punya pengajuan peminjaman.");
             }
@@ -162,7 +145,7 @@ public class RuangRepository {
         }
     }
 
-    /** Membuat id ruang berikutnya: R005 yang terakhir -> R006. */
+   
     private String buatIdBaru() throws SQLException {
         String sql = "SELECT id_ruang FROM ruang ORDER BY id_ruang DESC LIMIT 1";
         try (PreparedStatement ps = Koneksi.getKoneksi().prepareStatement(sql);

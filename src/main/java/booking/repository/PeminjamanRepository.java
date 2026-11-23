@@ -15,10 +15,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Akses tabel peminjaman.
- * Pemilik: Anggota B (bagian B) dan Anggota C (bagian C)
- */
+
 public class PeminjamanRepository {
 
     private static final String SELECT_PEMINJAMAN =
@@ -32,7 +29,7 @@ public class PeminjamanRepository {
           + "JOIN ruang r ON p.id_ruang = r.id_ruang "
           + "LEFT JOIN `user` a ON p.id_admin = a.id_user ";
 
-    // Mengubah hasil query menjadi objek Peminjaman.
+    
     private Peminjaman petakan(ResultSet rs) throws SQLException {
 
         Mahasiswa mahasiswa = new Mahasiswa(
@@ -76,7 +73,7 @@ public class PeminjamanRepository {
         );
     }
 
-    // ======================== BAGIAN ANGGOTA B ========================
+    
 
     public String idBerikutnya() {
 
@@ -221,10 +218,7 @@ public class PeminjamanRepository {
         return 0;
     }
 
-    // ======================== BAGIAN ANGGOTA C ========================
-
-    // Mengambil daftar pengajuan berdasarkan status.
-    // Status null berarti mengambil semua pengajuan.
+   
     public List<Peminjaman> cariByStatus(String status) {
 
         List<Peminjaman> hasil = new ArrayList<>();
@@ -258,7 +252,7 @@ public class PeminjamanRepository {
         return hasil;
     }
 
-    // Mengambil satu pengajuan berdasarkan ID.
+    
     public Peminjaman cariById(String idPeminjaman) {
 
         String sql = SELECT_PEMINJAMAN
@@ -283,7 +277,7 @@ public class PeminjamanRepository {
         return null;
     }
 
-    // Memperbarui status dan mencatat admin yang memverifikasi.
+   
     public void perbaruiStatus(
             String idPeminjaman,
             String status,
@@ -323,8 +317,7 @@ public class PeminjamanRepository {
         }
     }
 
-    // Menghitung jumlah pengajuan berdasarkan status.
-    // Status null berarti menghitung semua pengajuan.
+   
     public int hitung(String status) {
 
         String sql = "SELECT COUNT(*) FROM peminjaman";

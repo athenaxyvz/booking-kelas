@@ -7,10 +7,7 @@ import booking.repository.PeminjamanRepository;
 
 import java.util.List;
 
-/**
- * Dashboard admin (UC-07).
- * Pemilik: Anggota C
- */
+
 public class DashboardAdminMenu {
 
     private final PeminjamanRepository repository =
@@ -18,13 +15,13 @@ public class DashboardAdminMenu {
 
     public void tampilkan(Admin admin) {
 
-        // Mengambil jumlah seluruh pengajuan berdasarkan status
+        
         int total = repository.hitung(null);
         int menunggu = repository.hitung(Peminjaman.MENUNGGU);
         int disetujui = repository.hitung(Peminjaman.DISETUJUI);
         int ditolak = repository.hitung(Peminjaman.DITOLAK);
 
-        // Mengambil daftar seluruh pengajuan
+        
         List<Peminjaman> daftar =
                 repository.cariByStatus(null);
 

@@ -7,14 +7,7 @@ import booking.model.User;
 import booking.repository.UserRepository;
 import booking.util.Input;
 
-/**
- * Layar login (UC-01).
- * Pemilik: Anggota A
- *
- * Alur: minta "Username / NIM" dan password -> UserRepository.cariByIdentitas()
- * -> user.login(password). Mahasiswa masuk MenuMahasiswa, Admin masuk MenuAdmin.
- * Setelah logout, program kembali ke layar login lagi.
- */
+
 public class MenuLogin {
 
     private final UserRepository userRepository = new UserRepository();
@@ -43,10 +36,7 @@ public class MenuLogin {
         }
     }
 
-    /**
-     * Mengulang pertanyaan login sampai berhasil.
-     * Mengembalikan null jika pengguna mengetik 0 (ingin menutup program).
-     */
+    
     private User mintaLogin() {
         while (true) {
             String identitas = Input.teks("Username / NIM : ");

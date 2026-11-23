@@ -4,13 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import booking.repository.PeminjamanRepository;
 
-/**
- * Ruang yang bisa dipinjam.
- * Pemilik: Anggota A (kelas)  |  cekKetersediaan() dikerjakan Anggota B
- *
- * status = kondisi umum ruang (AKTIF atau PERAWATAN) yang diatur admin.
- * Ini BERBEDA dari ketersediaan pada tanggal dan jam tertentu (cekKetersediaan).
- */
+
 public class Ruang {
     public static final String AKTIF = "AKTIF";
     public static final String PERAWATAN = "PERAWATAN";
@@ -48,12 +42,7 @@ public class Ruang {
     public void setLokasi(String lokasi) { this.lokasi = lokasi; }
     public void setKeterangan(String keterangan) { this.keterangan = keterangan; }
 
-    /**
-     * TODO (Anggota B): true jika ruang ini kosong pada tanggal dan jam tersebut.
-     * Aturan: ruang TIDAK tersedia jika statusnya PERAWATAN, atau jika sudah ada
-     * pengajuan DISETUJUI yang jadwalnya bertumpuk.
-     * Petunjuk: gunakan PeminjamanRepository.adaBentrok(...).
-     */
+    
     public boolean cekKetersediaan(LocalDate tanggal, LocalTime jamMulai, LocalTime jamSelesai) {
         if (!AKTIF.equals(status)) {
             return false;

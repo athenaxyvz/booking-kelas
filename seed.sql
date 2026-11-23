@@ -1,6 +1,5 @@
 -- =====================================================================
 -- seed.sql : data contoh (jalankan SETELAH schema.sql)
--- Data ini sama dengan contoh di mockup terminal, supaya demo ketiga anggota seragam.
 -- Akun contoh:
 --   Admin     -> login: admin1 (atau admin2) | password: admin123
 --   Mahasiswa -> login: 25210001 (NIM)       | password: password123

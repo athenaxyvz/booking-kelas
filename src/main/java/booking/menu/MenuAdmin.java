@@ -3,13 +3,7 @@ package booking.menu;
 import booking.model.Admin;
 import booking.util.Input;
 
-/**
- * Menu utama admin (Layar 12 di mockup).
- * Pemilik: Anggota A
- *
- * Polanya sama dengan MenuMahasiswa:
- * loop -> cetak pilihan -> baca angka -> switch -> panggil layar yang sesuai.
- */
+
 public class MenuAdmin {
 
     public void tampilkan(Admin admin) {
@@ -27,9 +21,9 @@ public class MenuAdmin {
 
             int pilihan = Input.angka("Pilih menu : ");
             switch (pilihan) {
-                case 1 -> new DashboardAdminMenu().tampilkan(admin);   // Anggota C
-                case 2 -> new VerifikasiMenu().tampilkan(admin);       // Anggota C
-                case 3 -> new KelolaRuangMenu().tampilkan();           // Anggota A
+                case 1 -> new DashboardAdminMenu().tampilkan(admin);   
+                case 2 -> new VerifikasiMenu().tampilkan(admin);       
+                case 3 -> new KelolaRuangMenu().tampilkan();           
                 case 0 -> {
                     if (Input.konfirmasi("Anda yakin ingin keluar?")) {
                         admin.logout();

@@ -3,13 +3,7 @@ package booking.menu;
 import booking.model.Mahasiswa;
 import booking.util.Input;
 
-/**
- * Menu utama mahasiswa (Layar 5 di mockup).
- * Pemilik: Anggota A  |  STATUS: CONTOH POLA MENU YANG SUDAH JADI
- *
- * Jadikan file ini contoh untuk menulis MenuAdmin dan menu-menu lain:
- * loop -> cetak pilihan -> baca angka -> switch -> panggil layar yang sesuai.
- */
+
 public class MenuMahasiswa {
 
     public void tampilkan(Mahasiswa mahasiswa) {
@@ -28,10 +22,10 @@ public class MenuMahasiswa {
 
             int pilihan = Input.angka("Pilih menu : ");
             switch (pilihan) {
-                case 1 -> new DashboardMahasiswaMenu().tampilkan(mahasiswa);   // Anggota B
-                case 2 -> new DaftarRuangMenu().tampilkan();                   // Anggota A
-                case 3 -> new AjukanPeminjamanMenu().tampilkan(mahasiswa);     // Anggota B
-                case 4 -> new StatusPengajuanMenu().tampilkan(mahasiswa);      // Anggota B
+                case 1 -> new DashboardMahasiswaMenu().tampilkan(mahasiswa);   
+                case 2 -> new DaftarRuangMenu().tampilkan();                   
+                case 3 -> new AjukanPeminjamanMenu().tampilkan(mahasiswa);     
+                case 4 -> new StatusPengajuanMenu().tampilkan(mahasiswa);     
                 case 0 -> {
                     if (Input.konfirmasi("Anda yakin ingin keluar?")) {
                         mahasiswa.logout();

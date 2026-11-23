@@ -12,16 +12,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Ajukan peminjaman ruang (UC-06).
- * Pemilik: Anggota B
- */
+
 public class AjukanPeminjamanMenu {
 
     private static final DateTimeFormatter TGL = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static final DateTimeFormatter JAM = DateTimeFormatter.ofPattern("HH:mm");
 
-    /** Alur: isi tanggal dan jam -> lihat ruang tersedia -> pilih ruang -> isi keperluan. */
+   
     public void tampilkan(Mahasiswa mahasiswa) {
         RuangRepository ruangRepo = new RuangRepository();
 

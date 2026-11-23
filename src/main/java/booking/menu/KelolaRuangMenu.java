@@ -6,12 +6,7 @@ import booking.util.Input;
 
 import java.util.List;
 
-/**
- * Kelola data ruang (UC-09, Layar 18 sampai 21 di mockup).
- * Pemilik: Anggota A
- *
- * Aksi: [T] Tambah, [E] Edit, [H] Hapus, [0] Kembali.
- */
+
 public class KelolaRuangMenu {
 
     private static final String GARIS =
@@ -43,7 +38,7 @@ public class KelolaRuangMenu {
         }
     }
 
-    // ---------------------------------------------------------------- tabel
+
 
     private void cetakTabel() {
         List<Ruang> daftar = repo.semua();
@@ -62,7 +57,7 @@ public class KelolaRuangMenu {
         System.out.println("Menampilkan " + daftar.size() + " data ruangan");
     }
 
-    // --------------------------------------------------------------- tambah
+   
 
     private void tambah() {
         System.out.println();
@@ -93,7 +88,7 @@ public class KelolaRuangMenu {
         }
     }
 
-    // ----------------------------------------------------------------- edit
+ 
 
     private void edit() {
         System.out.println();
@@ -144,7 +139,7 @@ public class KelolaRuangMenu {
         }
     }
 
-    // ---------------------------------------------------------------- hapus
+   
 
     private void hapus() {
         System.out.println();
@@ -169,9 +164,9 @@ public class KelolaRuangMenu {
         }
     }
 
-    // ------------------------------------------------------- pembantu input
+    
 
-    /** Mengulang pertanyaan sampai jawabannya tidak kosong. */
+   
     private String bacaWajib(String label) {
         while (true) {
             String isi = Input.teks(label);
@@ -182,7 +177,7 @@ public class KelolaRuangMenu {
         }
     }
 
-    /** Kapasitas wajib: angka lebih dari 0. */
+   
     private int bacaKapasitas(String label) {
         while (true) {
             int nilai = Input.angka(label);
@@ -193,7 +188,7 @@ public class KelolaRuangMenu {
         }
     }
 
-    /** Kapasitas untuk edit: kosong berarti tidak diubah (mengembalikan null). */
+    
     private Integer bacaKapasitasBoleh(String label) {
         while (true) {
             String isi = Input.teks(label);
@@ -212,7 +207,7 @@ public class KelolaRuangMenu {
         }
     }
 
-    /** Status wajib: Aktif atau Perawatan. */
+  
     private String bacaStatus(String label) {
         while (true) {
             String status = ubahKeStatus(Input.teks(label));
@@ -223,7 +218,7 @@ public class KelolaRuangMenu {
         }
     }
 
-    /** Status untuk edit: kosong berarti tidak diubah (mengembalikan null). */
+   
     private String bacaStatusBoleh(String label) {
         while (true) {
             String isi = Input.teks(label);
@@ -238,7 +233,7 @@ public class KelolaRuangMenu {
         }
     }
 
-    /** "aktif" -> AKTIF; "perawatan" atau "dalam perawatan" -> PERAWATAN; selain itu null. */
+    
     private String ubahKeStatus(String teks) {
         String t = teks.trim().toLowerCase();
         if (t.equals("aktif")) {
@@ -250,7 +245,7 @@ public class KelolaRuangMenu {
         return null;
     }
 
-    /** Mengubah nilai database (AKTIF / PERAWATAN) menjadi tulisan untuk layar. */
+   
     private String labelStatus(String status) {
         return Ruang.PERAWATAN.equals(status) ? "Dalam Perawatan" : "Aktif";
     }
