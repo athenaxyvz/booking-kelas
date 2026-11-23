@@ -135,7 +135,7 @@ Mahasiswa login menggunakan NIM, sedangkan admin login menggunakan username. Aku
 ```text
 booking-kelas/
 ├── docs/
-│   └── SKENARIO_TEST.md
+│   └── DEMO_SCRIPT.md
 ├── src/
 │   └── main/
 │       └── java/
@@ -186,6 +186,12 @@ Aplikasi ini menggunakan antarmuka terminal (CLI). Sesuai arahan dosen untuk pro
 **Tautan video demonstrasi:** [Tambahkan tautan video demonstrasi kelompok di sini]
 
 Tidak ada tautan live website karena aplikasi ini bukan aplikasi web yang di-hosting.
+
+## Laporan Proyek
+
+Dokumentasi lengkap proyek dapat dilihat pada:
+
+[Laporan Akhir PBO Kelompok 3 (PDF)](docs/Laporan_Akhir_PBO_Kelompok3.pdf)
 
 ## Repository
 
