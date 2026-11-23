@@ -1,7 +1,6 @@
 
 # SCRIPT DEMONSTRASI SISTEM BOOKING KELAS
 
-Pemilik: Anggota C
 
 ## 1. Pembukaan
 
