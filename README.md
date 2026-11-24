@@ -190,7 +190,7 @@ Tidak ada tautan live website karena aplikasi ini bukan aplikasi web yang di-hos
 
 ## Dokumentasi Proyek
 
-- [Laporan Akhir PBO (Word)](docs/Laporan_Akhir_PBO_Kelompok3.pdf)
+- [Laporan Akhir PBO (pdf)](docs/Laporan_Akhir_PBO_Kelompok3.pdf)
 
 ## Repository
 
