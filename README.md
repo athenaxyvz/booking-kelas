@@ -184,7 +184,7 @@ Hasil pengujian akhir dicatat berdasarkan pelaksanaan aplikasi yang sebenarnya.
 
 Aplikasi ini menggunakan antarmuka terminal (CLI). Sesuai arahan dosen untuk proyek berbasis terminal, demonstrasi aplikasi disediakan dalam bentuk video.
 
-**Tautan video demonstrasi:** [Tambahkan tautan video demonstrasi kelompok di sini]
+**Tautan video demonstrasi:** (https://youtu.be/sHBKFb786vc)
 
 Tidak ada tautan live website karena aplikasi ini bukan aplikasi web yang di-hosting.
 
