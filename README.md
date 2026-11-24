@@ -136,7 +136,7 @@ Mahasiswa login menggunakan NIM, sedangkan admin login menggunakan username. Aku
 booking-kelas/
 ├── docs/
 │   └── DEMO_SCRIPT.md
-│   └── Laporan_Akhir_PBO_Kelompok3.docx
+│   └── Laporan_Akhir_PBO_Kelompok3.PDF
 ├── src/
 │   └── main/
 │       └── java/
