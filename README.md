@@ -136,6 +136,7 @@ Mahasiswa login menggunakan NIM, sedangkan admin login menggunakan username. Aku
 booking-kelas/
 ├── docs/
 │   └── DEMO_SCRIPT.md
+│   └── Laporan_Akhir_PBO_Kelompok3.docx
 ├── src/
 │   └── main/
 │       └── java/
@@ -187,11 +188,9 @@ Aplikasi ini menggunakan antarmuka terminal (CLI). Sesuai arahan dosen untuk pro
 
 Tidak ada tautan live website karena aplikasi ini bukan aplikasi web yang di-hosting.
 
-## Laporan Proyek
+## Dokumentasi Proyek
 
-Dokumentasi lengkap proyek dapat dilihat pada:
-
-[Laporan Akhir PBO Kelompok 3 (PDF)](docs/Laporan_Akhir_PBO_Kelompok3.pdf)
+- [Laporan Akhir PBO (Word)](docs/Laporan_Akhir_PBO_Kelompok3.docx)
 
 ## Repository
 
